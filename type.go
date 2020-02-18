@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// This is request Input.
+// RequestInput is request Input.
 type RequestInput struct {
 	URL        *string
 	Headers    map[string]string
@@ -17,7 +17,7 @@ type RequestInput struct {
 	Client     *http.Client
 }
 
-// The request builder struct for method chaining
+// RequestBuilder is the request builder struct for method chaining
 type RequestBuilder struct {
 	RequestInput
 }
