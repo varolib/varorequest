@@ -8,7 +8,7 @@ This is a practice library to build request for a bank. The library is suppose t
 
 `varorequest` is currently compatible with golang version from 1.12+.
 
-## Request Builder [![GoDoc](https://godoc.org/github.com/varolib/varorequest/examples/?main.go)](https://godoc.org/github.com/varolib/varorequest#ReqBuilder)
+## Request Builder [![GoDoc](https://godoc.org/github.com/varolib/varorequest#ReqBuilder)
 ```go
 package main
   
