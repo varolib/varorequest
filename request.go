@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// New is the function to build a new RequestBuilder
 func New() RequestBuilder {
 	client := &http.Client{}
 	r := RequestInput{
@@ -21,7 +22,7 @@ func New() RequestBuilder {
 	}
 }
 
-// The purpose for this function is to make proxying request easier. Insteading of creating a new http client, we can use the request's http.Client to save time to mimick request.
+// NewWithClient is to simplify proxy request. Insteading of creating a new http client, we can use the request's http.Client to save time to mimick request.
 func NewWithClient(c *http.Client) RequestBuilder {
 	var client *http.Client
 	if c == nil {
@@ -36,39 +37,56 @@ func NewWithClient(c *http.Client) RequestBuilder {
 		RequestInput: r,
 	}
 }
+
+// SetURL sets the url
 func (r *RequestBuilder) SetURL(b string) *RequestBuilder {
 	r.RequestInput.URL = &b
 	return r
 }
+
+// SetBodyBytes set the body in terms of bytes
 func (r *RequestBuilder) SetBodyBytes(b []byte) *RequestBuilder {
 	r.RequestInput.BodyBytes = b
 	return r
 }
+
+// SetHeaders sets the header with input variable map[string]string
 func (r *RequestBuilder) SetHeaders(h map[string]string) *RequestBuilder {
 	r.RequestInput.Headers = h
 	return r
 }
+
+// SetRawHeaders sets the header but passing down the http.Header as a variable
 func (r *RequestBuilder) SetRawHeaders(h http.Header) *RequestBuilder {
 	r.RequestInput.RawHeaders = h
 	return r
 }
+
+// SetTimeOut sets the timeout
 func (r *RequestBuilder) SetTimeOut(h int) *RequestBuilder {
-	//	r.RequestInput.Client.Timeout = time.Duration(h) * time.Second
 	r.RequestInput.TimeOut = h
 	return r
 }
+
+// SetMethod sets the http method
 func (r *RequestBuilder) SetMethod(m string) *RequestBuilder {
 	r.RequestInput.Method = &m
 	return r
 }
+
+// NoVerify sets whether we should do https verifying when doing the request
 func (r *RequestBuilder) NoVerify() *RequestBuilder {
 	r.RequestInput.NoVerify = true
 	return r
 }
+
+// SetJson sets the json as body
 func (r *RequestBuilder) SetJson(j interface{}) *RequestBuilder {
 	r.RequestInput.Json = &j
 	return r
 }
+
+// Do is executing the request
 func (r *RequestBuilder) Do() (*http.Response, error) {
 	var client *http.Client
 	if r.RequestInput.Client == nil {
